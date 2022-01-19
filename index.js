@@ -1,4 +1,45 @@
 /* Your Code Here */
+function createEmployeeRecord(empArr) {
+    const timeIn = [];
+    const timeOut = [];
+    const employee = {};
+    employee.firstName = empArr[0],
+    employee.familyName = empArr[1],
+    employee.title = empArr[2],
+    employee.payPerHour = empArr[3]
+    employee.timeInEvents = timeIn;
+    employee.timeOutEvents = timeOut;
+    return employee;
+}
+
+function createEmployeeRecords (empArrays) {
+    let empIndex = [];
+    for (const element of empArrays) {
+        let tempEmp = createEmployeeRecord(element);
+        empIndex.push(tempEmp);
+    }
+    return empIndex;
+}
+
+function createTimeInEvent (timeString) {
+    const timeIn = [];
+    const timeStamp = timeString.split(' ');
+    const timeInData = {
+        type: 'TimeIn',
+        date: timeStamp[0],
+        time: timeStamp[1]
+        };
+    // console.log(timeInData);
+    const empIndex = createEmployeeRecords();
+    console.log(empIndex);
+    timeIn.push(timeInData);
+    return timeIn;
+}
+
+function createTimeOutEvent () {
+
+}
+
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
