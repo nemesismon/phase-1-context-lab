@@ -17,22 +17,25 @@ function createEmployeeRecords (empArrays) {
     for (const element of empArrays) {
         let tempEmp = createEmployeeRecord(element);
         empIndex.push(tempEmp);
-    }
+        }
     return empIndex;
 }
 
 function createTimeInEvent (timeString) {
     const timeIn = [];
     const timeStamp = timeString.split(' ');
+    // console.log(timeStamp);
     const timeInData = {
         type: 'TimeIn',
         date: timeStamp[0],
-        time: timeStamp[1]
+        time: timeStamp[1],
         };
-    // console.log(timeInData);
-    const empIndex = createEmployeeRecords();
-    console.log(empIndex);
+    // const empIndex = createEmployeeRecords();
+    // console.log(empIndex);
     timeIn.push(timeInData);
+    // console.log(timeInData);
+    console.log(this.timeInEvents.push(timeInData));
+    // console.log(timeIn);
     return timeIn;
 }
 
