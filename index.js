@@ -42,14 +42,14 @@ function createTimeOutEvent (timeString) {
 function hoursWorkedOnDate (date) {
     for (let i=0; i < this.timeInEvents.length; i++) {
         if (date === this.timeInEvents[i].date) {
-            return ((this.timeOutEvents[i].hour - this.timeInEvents[i].hour) / 100);
+            return (this.timeOutEvents[i].hour - this.timeInEvents[i].hour) / 100;
         }
     }
 }
         
 function wagesEarnedOnDate (date) {
-    let hoursInt = hoursWorkedOnDate(date);
-    console.log(hoursInt);
+    let hoursInt = hoursWorkedOnDate.call(this, date);
+    return hoursInt * this.payPerHour;
 }
 
 /*
@@ -73,6 +73,19 @@ const allWagesFor = function () {
     return payable
 }
 
-function calculatePayroll () {
+function findEmployeeByFirstName(empRecs, name) {
+    for (const emp of empRecs) {
+        if (emp.firstName === name) {
+            return emp;
+        }
+    }
+}
 
+function calculatePayroll (empRecs) {
+    let total = 0;
+    for (const emp of empRecs) {
+    let wages = allWagesFor.call(emp);
+    total += wages;
+    }
+    return total;
 }
