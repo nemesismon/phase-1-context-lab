@@ -1,15 +1,13 @@
 /* Your Code Here */
 function createEmployeeRecord(empArr) {
-    const timeIn = [];
-    const timeOut = [];
-    const employee = {};
-    employee.firstName = empArr[0],
-    employee.familyName = empArr[1],
-    employee.title = empArr[2],
-    employee.payPerHour = empArr[3]
-    employee.timeInEvents = timeIn;
-    employee.timeOutEvents = timeOut;
-    return employee;
+    return {
+        firstName: empArr[0],
+        familyName:  empArr[1],
+        title: empArr[2],
+        payPerHour: empArr[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
 }
 
 function createEmployeeRecords (empArrays) {
@@ -22,27 +20,37 @@ function createEmployeeRecords (empArrays) {
 }
 
 function createTimeInEvent (timeString) {
-    const timeIn = [];
-    const timeStamp = timeString.split(' ');
-    // console.log(timeStamp);
-    const timeInData = {
+    let [date, hour] = timeString.split(' ');
+    this.timeInEvents.push({
         type: 'TimeIn',
-        date: timeStamp[0],
-        time: timeStamp[1],
-        };
-    // const empIndex = createEmployeeRecords();
-    // console.log(empIndex);
-    timeIn.push(timeInData);
-    // console.log(timeInData);
-    console.log(this.timeInEvents.push(timeInData));
-    // console.log(timeIn);
-    return timeIn;
+        hour: parseInt(hour, 10),
+        date: date,
+    })
+    return this;
 }
 
-function createTimeOutEvent () {
-
+function createTimeOutEvent (timeString) {
+    let [date, hour] = timeString.split(' ');
+    this.timeOutEvents.push({
+        type: 'TimeOut',
+        hour: parseInt(hour, 10),
+        date: date,
+    })
+    return this;
 }
 
+function hoursWorkedOnDate (date) {
+    for (let i=0; i < this.timeInEvents.length; i++) {
+        if (date === this.timeInEvents[i].date) {
+            return ((this.timeOutEvents[i].hour - this.timeInEvents[i].hour) / 100);
+        }
+    }
+}
+        
+function wagesEarnedOnDate (date) {
+    let hoursInt = hoursWorkedOnDate(date);
+    console.log(hoursInt);
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
@@ -65,3 +73,6 @@ const allWagesFor = function () {
     return payable
 }
 
+function calculatePayroll () {
+
+}
